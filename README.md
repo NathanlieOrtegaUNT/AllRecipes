@@ -1,1 +1,1 @@
-# AllRecipes
+# This is AllRecipes clone project README file
