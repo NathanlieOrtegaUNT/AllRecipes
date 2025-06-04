@@ -103,7 +103,7 @@ To run this project locally, you'll need Node.js and npm (or yarn) installed on 
 
 # New Usage with New Extensions
 
-(To be Added...)
+(To be Added Soon...)
 
 
 
