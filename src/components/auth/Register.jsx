@@ -217,7 +217,7 @@ const Register = ({ onSwitchView, onUserUpdate }) => {
               onClick={toggleConfirmPasswordVisibility}
               aria-label={showConfirmPassword ? "Hide confirm password" : "Show confirm password"}
             >
-              {showConfirmPassword ? "🙉" : "👁️"}
+              {showConfirmPassword ? "👁️" : "👁️‍🗨️"}
             </button>
           </div>
         </div>
