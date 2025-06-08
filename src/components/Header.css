@@ -12,10 +12,7 @@
     justify-content: space-between;
     align-items: center;
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 .header-container h1 
 {
     font-family: 'Satisfy';
@@ -24,16 +21,11 @@
     gap: 5px;
     color:white;
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 .header-container a 
 {
     text-decoration: none;
 }
-<<<<<<< Updated upstream
-=======
 
 /* Navigation Menu */
 .header-nav {
@@ -64,13 +56,8 @@
     background: rgba(255, 107, 53, 0.15);
 }
 
->>>>>>> Stashed changes
 .user-img
 {
     font-size: 30px;
     cursor: pointer;
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
