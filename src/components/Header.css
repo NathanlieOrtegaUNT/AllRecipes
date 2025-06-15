@@ -2,17 +2,21 @@
 
 .header-container 
 {
-    margin: -50px -100px 30px;
-    padding:10px 20px;
+    margin: 0; /* Changed from: margin: -50px -100px 30px; */
+    padding: 10px 20px;
     background-color: #202020;
-    color:white;
-    position: sticky;
-    top:0;
+    color: white;
+    position: fixed; /* Changed from: position: sticky; */
+    top: 0; /* Keep top: 0 */
+    left: 0; /* Added: left: 0 */
+    right: 0; /* Added: right: 0 */
+    width: 100%; /* Added: width: 100% */
     z-index: 999;
     box-shadow: 0px 0px 3px 1px black;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box; /* Added: box-sizing: border-box */
 }
 
 .header-container h1 
@@ -21,7 +25,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color:white;
+    color: white;
 }
 
 .header-container a 
@@ -128,7 +132,13 @@
 @media (max-width: 768px) {
     .header-container {
         padding: 8px 15px;
-        margin: -50px -100px 20px;
+        margin: 0; /* Changed from: margin: -50px -100px 20px; */
+        position: fixed; /* Keep fixed positioning */
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .header-nav {
@@ -162,6 +172,13 @@
 @media (max-width: 480px) {
     .header-container {
         padding: 6px 10px;
+        margin: 0; /* Added: margin: 0 */
+        position: fixed; /* Keep fixed positioning */
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .header-nav {
