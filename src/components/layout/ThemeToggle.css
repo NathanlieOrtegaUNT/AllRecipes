@@ -1,0 +1,146 @@
+/* AllRecipes/src/components/layout/ThemeToggle.css */
+
+.theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .theme-toggle:hover {
+    background: var(--hover-bg, rgba(0, 0, 0, 0.1));
+  }
+  
+  .theme-toggle:focus {
+    outline: 2px solid var(--focus-color, #007bff);
+    outline-offset: 2px;
+  }
+  
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: #ccc;
+    border-radius: 13px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .toggle-switch.dark {
+    background: #4a90e2;
+  }
+  
+  .toggle-switch.light {
+    background: #ffd700;
+  }
+  
+  .toggle-handle {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .toggle-switch.dark .toggle-handle {
+    transform: translateX(24px);
+    background: #2c3e50;
+  }
+  
+  .toggle-switch.light .toggle-handle {
+    transform: translateX(0);
+    background: white;
+  }
+  
+  .theme-icon {
+    width: 14px;
+    height: 14px;
+    transition: all 0.3s ease;
+  }
+  
+  .theme-icon.sun {
+    color: #ffa500;
+  }
+  
+  .theme-icon.moon {
+    color: #f1c40f;
+  }
+  
+  .toggle-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+    min-width: 40px;
+    text-align: left;
+  }
+  
+  
+  .header-container .toggle-label,
+  .header-right-section .toggle-label {
+    color: white !important;
+  }
+  
+  .header-container .theme-icon,
+  .header-right-section .theme-icon {
+    color: white !important;
+  }
+  
+  
+  .header-container .theme-icon.sun,
+  .header-right-section .theme-icon.sun {
+    color: #ffa500 !important;
+  }
+  
+  
+  .header-container .theme-toggle:hover,
+  .header-right-section .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  /* Transition effects */
+  .theme-toggle.transitioning .toggle-switch {
+    transform: scale(0.95);
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .toggle-label {
+      display: none;
+    }
+    
+    .toggle-container {
+      gap: 0;
+    }
+    
+    .theme-toggle {
+      padding: 6px;
+    }
+  }
+  
+  /* Dark mode specific hover effects */
+  [data-theme="dark"] .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Light mode specific hover effects */
+  [data-theme="light"] .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
