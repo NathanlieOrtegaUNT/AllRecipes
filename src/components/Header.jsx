@@ -1,4 +1,4 @@
-// src/components/Header.jsx
+// AllRecipes/src/components/Header.jsx
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { GiSpoon } from 'react-icons/gi';
 import { BiSolidUserCircle } from 'react-icons/bi';
 import { useFavorites } from '../context/FavoritesContext';
 import UserSidebar from './UserSidebar';
+import ThemeToggle from './layout/ThemeToggle'; 
 
 const Header = () => {
   const [user, setUser] = useState(null);
@@ -23,7 +24,7 @@ const getLocalStorageUser = () => {
     if (userData) {
       const parsedUser = JSON.parse(userData);
       if (parsedUser.isLoggedIn) {
-        // Check if there's a separately saved profile picture
+
         const savedProfilePicture = localStorage.getItem(`profilePicture_${parsedUser.email}`);
         if (savedProfilePicture && !parsedUser.profilePicture) {
           parsedUser.profilePicture = savedProfilePicture;
@@ -52,7 +53,7 @@ const getLocalStorageUser = () => {
           // User is signed in with Firebase - check localStorage for updates
           const localUser = getLocalStorageUser();
           if (localUser && localUser.email === firebaseUser.email) {
-            setUser({...localUser}); // Use localStorage data which may have profile picture
+            setUser({...localUser}); 
           } else {
             // Create new user data from Firebase, but preserve any existing profile picture
             const existingUser = getLocalStorageUser();
@@ -62,7 +63,7 @@ const getLocalStorageUser = () => {
               email: firebaseUser.email,
               isLoggedIn: true,
               provider: 'firebase',
-              // Preserve profile picture if it exists
+              
               ...(existingUser?.profilePicture && { profilePicture: existingUser.profilePicture })
             };
             setUser(userData);
@@ -174,7 +175,7 @@ const getLocalStorageUser = () => {
   };
 
   const handleUserUpdate = (updatedUser) => {
-    setUser({...updatedUser}); // Force new object reference
+    setUser({...updatedUser});
     localStorage.setItem('allRecipesUser', JSON.stringify(updatedUser));
   };
 
@@ -202,11 +203,15 @@ const getLocalStorageUser = () => {
           <Link to="/" className="nav-link">Home</Link>
         </nav>
         
-        <BiSolidUserCircle 
-          className='user-img' 
-          style={{ opacity: 0.5 }}
-          title="Loading..."
-        />
+        {/* UPDATED: Right section with theme toggle + user icon */}
+        <div className="header-right-section">
+          <ThemeToggle />
+          <BiSolidUserCircle 
+            className='user-img' 
+            style={{ opacity: 0.5 }}
+            title="Loading..."
+          />
+        </div>
       </div>
     );
   }
@@ -253,56 +258,60 @@ const getLocalStorageUser = () => {
           </Link>
         </nav>
         
-        {user ? (
-          // Show user avatar when logged in
-          <div 
-            className="user-avatar-header"
-            onClick={handleAuthClick}
-            title={`${user.name || user.email} - Click for account`}
-            style={{ 
-              cursor: 'pointer',
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              background: user.profilePicture ? 'transparent' : 'linear-gradient(135deg, #ff6b35, #f7931e)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              color: 'white',
-              fontWeight: '600',
-              fontSize: '0.9rem',
-              letterSpacing: '0.5px',
-              boxShadow: '0 2px 10px rgba(255, 107, 53, 0.3)',
-              transition: 'all 0.3s ease',
-              overflow: 'hidden'
-            }}
-          >
-            {user.profilePicture ? (
-              <img 
-                src={user.profilePicture} 
-                alt="Profile" 
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  objectPosition: 'center',
-                  borderRadius: '50%',
-                  display: 'block'
-                }}
-              />
-            ) : (
-              getInitials(user.name || user.email)
-            )}
-          </div>
-        ) : (
-          // Show login icon when not logged in
-          <BiSolidUserCircle 
-            className='user-img' 
-            onClick={handleAuthClick}
-            title="Login / Register"
-            style={{ cursor: 'pointer' }}
-          />
-        )}
+        {/* UPDATED: Right section with theme toggle + user icon */}
+        <div className="header-right-section">
+          <ThemeToggle />
+          {user ? (
+            // Show user avatar when logged in
+            <div 
+              className="user-avatar-header"
+              onClick={handleAuthClick}
+              title={`${user.name || user.email} - Click for account`}
+              style={{ 
+                cursor: 'pointer',
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                background: user.profilePicture ? 'transparent' : 'linear-gradient(135deg, #ff6b35, #f7931e)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontWeight: '600',
+                fontSize: '0.9rem',
+                letterSpacing: '0.5px',
+                boxShadow: '0 2px 10px rgba(255, 107, 53, 0.3)',
+                transition: 'all 0.3s ease',
+                overflow: 'hidden'
+              }}
+            >
+              {user.profilePicture ? (
+                <img 
+                  src={user.profilePicture} 
+                  alt="Profile" 
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    borderRadius: '50%',
+                    display: 'block'
+                  }}
+                />
+              ) : (
+                getInitials(user.name || user.email)
+              )}
+            </div>
+          ) : (
+            // Show login icon when not logged in
+            <BiSolidUserCircle 
+              className='user-img' 
+              onClick={handleAuthClick}
+              title="Login / Register"
+              style={{ cursor: 'pointer' }}
+            />
+          )}
+        </div>
       </div>
 
       {showSidebar && user && (
