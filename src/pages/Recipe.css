@@ -7,7 +7,7 @@
     gap: 20px;
 }
 
-/* NEW: Title with Favorite Button */
+
 .recipe-title-with-favorite {
     display: flex;
     justify-content: space-between;
@@ -19,6 +19,8 @@
 .recipe-title-with-favorite h1 {
     margin: 0;
     flex: 1;
+    
+    color: var(--text-primary);
 }
 
 .recipe-favorite-btn {
@@ -40,10 +42,70 @@
     gap: 20px;
     margin-bottom: 20px;
 }
+
+
 .btn-container button 
 {
     background-color: #202020;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
 }
+
+
+.btn-container button:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+
+/* Active/selected button state for better visibility */
+.btn-container button:disabled {
+    background-color: #ff6b35 !important;
+    color: white !important;
+    cursor: default;
+    opacity: 1;
+}
+
+/* Dark mode specific button styles */
+[data-theme="dark"] .btn-container button {
+    background-color: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+[data-theme="dark"] .btn-container button:hover {
+    background-color: #444;
+    border-color: #666;
+}
+
+[data-theme="dark"] .btn-container button:disabled {
+    background-color: #ff6b35 !important;
+    color: white !important;
+    border-color: #ff6b35 !important;
+}
+
+/* Light mode specific button styles */
+[data-theme="light"] .btn-container button {
+    background-color: #202020;
+    color: white;
+    border: 1px solid #202020;
+}
+
+[data-theme="light"] .btn-container button:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+[data-theme="light"] .btn-container button:disabled {
+    background-color: #ff6b35 !important;
+    color: white !important;
+    border-color: #ff6b35 !important;
+}
+
 .recipe-right-main
 {
     display: flex;
@@ -51,14 +113,25 @@
     gap: 20px;
     line-height: 30px;
 }
-.summary h2 
-{
-    margin-bottom: 20px;
+
+/* Theme support for recipe content */
+.recipe-right-main,
+.summary,
+.instructions,
+.steps {
+    color: var(--text-primary);
 }
-.instructions h2 
-{
+
+.summary h2,
+.instructions h2 {
     margin-bottom: 20px;
+    color: var(--text-primary);
 }
+
+.steps h1 {
+    color: var(--text-primary);
+}
+
 .steps 
 {
     display: flex;
@@ -71,6 +144,14 @@
     flex-direction: column;
     gap: 10px;
 }
+
+/* Theme support for step content */
+.step h2,
+.step h4,
+.step p {
+    color: var(--text-primary);
+}
+
 .recipe-shimmer-container
 {
     display: flex;
@@ -100,6 +181,21 @@
 {
     display: flex;
     justify-content: space-between;
+    
+    color: var(--text-primary);
+}
+
+
+.ingredient-bar h3,
+.ingredient-bar p {
+    color: var(--text-primary);
+}
+
+
+.recipe-container-main {
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
 /* Responsive Design */
