@@ -1,8 +1,11 @@
 /* AllRecipes/src/App.css */
 
-.app-container 
-{
+.app-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  background-color: var(--primary-bg, #ffffff);
+  color: var(--text-primary, #212529);
+  transition: all 0.3s ease;
 }
