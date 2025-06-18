@@ -1,22 +1,20 @@
-/* src/components/Header.css */
+/* AllRecipes/src/components/Header.css */
 
 .header-container 
 {
-    margin: 0; /* Changed from: margin: -50px -100px 30px; */
-    padding: 10px 20px;
+    margin: -50px -100px 30px;
+    padding:10px 20px;
     background-color: #202020;
-    color: white;
-    position: fixed; /* Changed from: position: sticky; */
-    top: 0; /* Keep top: 0 */
-    left: 0; /* Added: left: 0 */
-    right: 0; /* Added: right: 0 */
-    width: 100%; /* Added: width: 100% */
+    color:white;
+    position: sticky;
+    top:0;
     z-index: 999;
     box-shadow: 0px 0px 3px 1px black;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box; /* Added: box-sizing: border-box */
+
+    transition: all 0.3s ease;
 }
 
 .header-container h1 
@@ -25,7 +23,9 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: white;
+    color:white;
+    /* ADDED: Smooth transition */
+    transition: all 0.3s ease;
 }
 
 .header-container a 
@@ -61,7 +61,6 @@
     background: rgba(255, 107, 53, 0.1);
 }
 
-/* REMOVED: .nav-link.active styles that were causing orange background */
 
 /* Favorites Link Specific Styles */
 .favorites-link {
@@ -122,23 +121,71 @@
     }
 }
 
+/* UPDATED: Header right section for theme toggle + user icon */
+.header-right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* UPDATED: Force theme toggle text color to be white in header */
+.header-right-section .toggle-label {
+    color: white !important;
+    font-weight: 500;
+}
+
+/* ADDED: Ensure theme toggle elements are white in header */
+.header-right-section .theme-toggle {
+    color: white;
+}
+
+.header-right-section .theme-icon {
+    color: white !important;
+}
+
 .user-img
 {
     font-size: 30px;
     cursor: pointer;
+    /* ADDED: Smooth transition */
+    transition: all 0.3s ease;
+}
+
+/* ADDED: Theme-specific hover effects for user image */
+.user-img:hover {
+    color: #ff6b35;
+    transform: scale(1.1);
+}
+
+/* ADDED: Theme support for user avatar */
+.user-avatar-header:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.5) !important;
+}
+
+/* ADDED: Theme-specific adjustments while keeping header consistent */
+[data-theme="dark"] .header-container {
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .header-container {
+    box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+/* ADDED: Theme toggle hover effects in header */
+[data-theme="dark"] .nav-link:hover {
+    background: rgba(255, 107, 53, 0.15);
+}
+
+[data-theme="light"] .nav-link:hover {
+    background: rgba(255, 107, 53, 0.1);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .header-container {
         padding: 8px 15px;
-        margin: 0; /* Changed from: margin: -50px -100px 20px; */
-        position: fixed; /* Keep fixed positioning */
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        box-sizing: border-box;
+        margin: -50px -100px 20px;
     }
 
     .header-nav {
@@ -172,13 +219,6 @@
 @media (max-width: 480px) {
     .header-container {
         padding: 6px 10px;
-        margin: 0; /* Added: margin: 0 */
-        position: fixed; /* Keep fixed positioning */
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        box-sizing: border-box;
     }
 
     .header-nav {
