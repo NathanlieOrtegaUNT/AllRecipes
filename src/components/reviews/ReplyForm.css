@@ -1,0 +1,192 @@
+/* AllRecipes/src/components/reviews/ReplyForm.css */
+
+.reply-form-container {
+  background: var(--reply-form-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 12px 0 12px 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reply-form-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.reply-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reply-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  background: var(--input-bg);
+  resize: vertical;
+  transition: all 0.3s ease;
+}
+
+.reply-textarea:focus {
+  outline: none;
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+}
+
+.reply-textarea.error {
+  border-color: #e74c3c;
+}
+
+.reply-textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.reply-textarea-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2px;
+}
+
+.reply-character-count {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.reply-error-message {
+  display: block;
+  margin-top: 4px;
+  color: #e74c3c;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.reply-form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color);
+}
+
+.reply-btn-cancel,
+.reply-btn-submit {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  min-width: 80px;
+}
+
+.reply-btn-cancel {
+  background: var(--secondary-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.reply-btn-cancel:hover:not(:disabled) {
+  background: var(--hover-bg);
+  transform: translateY(-1px);
+}
+
+.reply-btn-submit {
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  color: white;
+  box-shadow: 0 2px 6px rgba(255, 107, 53, 0.3);
+}
+
+.reply-btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e55a2e, #e0841a);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(255, 107, 53, 0.4);
+}
+
+.reply-btn-submit:disabled,
+.reply-btn-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.reply-loading-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reply-loading-text::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Theme-specific variables */
+[data-theme="light"] {
+  --reply-form-bg: #f9f9f9;
+  --border-color: #e0e0e0;
+  --input-bg: #ffffff;
+  --secondary-bg: #f5f5f5;
+  --hover-bg: #eeeeee;
+}
+
+[data-theme="dark"] {
+  --reply-form-bg: #1f1f1f;
+  --border-color: #404040;
+  --input-bg: #333333;
+  --secondary-bg: #333333;
+  --hover-bg: #404040;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .reply-form-container {
+    padding: 12px;
+    margin: 12px 0 12px 20px;
+  }
+
+  .reply-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .reply-btn-cancel,
+  .reply-btn-submit {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .reply-form-container {
+    padding: 10px;
+  }
+
+  .reply-textarea {
+    font-size: 0.85rem;
+  }
+}

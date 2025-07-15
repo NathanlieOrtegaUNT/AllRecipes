@@ -1,0 +1,208 @@
+/* AllRecipes/src/components/reviews/Reply.css */
+
+.reply-item {
+  background: var(--reply-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  margin: 8px 0 8px 40px; 
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.reply-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reply-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.reply-user-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex: 1;
+}
+
+.reply-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.reply-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.reply-avatar-initials {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+
+.reply-details {
+  flex: 1;
+}
+
+.reply-user-name {
+  margin: 0 0 2px 0;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.reply-date {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.reply-actions {
+  position: relative;
+}
+
+.reply-action-menu-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.reply-action-menu-btn:hover {
+  background: var(--hover-bg);
+  color: var(--text-primary);
+}
+
+.reply-dots-icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.reply-action-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  min-width: 100px;
+  overflow: hidden;
+}
+
+.reply-action-btn {
+  width: 100%;
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.reply-action-btn:hover:not(:disabled) {
+  background: var(--hover-bg);
+}
+
+.reply-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.reply-action-btn.edit-btn:hover {
+  color: #3498db;
+}
+
+.reply-action-btn.delete-btn:hover {
+  color: #e74c3c;
+}
+
+.edit-icon,
+.delete-icon {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.reply-content {
+  margin-top: 4px;
+}
+
+.reply-text {
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+/* Theme-specific variables */
+[data-theme="light"] {
+  --reply-bg: #f9f9f9;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --hover-bg: #f5f5f5;
+}
+
+[data-theme="dark"] {
+  --reply-bg: #1f1f1f;
+  --card-bg: #2a2a2a;
+  --border-color: #404040;
+  --hover-bg: #333333;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .reply-item {
+    margin: 8px 0 8px 20px;
+    padding: 10px;
+  }
+
+  .reply-user-info {
+    gap: 6px;
+  }
+
+  .reply-avatar {
+    width: 24px;
+    height: 24px;
+  }
+
+  .reply-avatar-initials {
+    font-size: 0.6rem;
+  }
+
+  .reply-user-name {
+    font-size: 0.8rem;
+  }
+
+  .reply-date {
+    font-size: 0.7rem;
+  }
+
+  .reply-text {
+    font-size: 0.8rem;
+  }
+}
