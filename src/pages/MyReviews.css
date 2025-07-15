@@ -201,7 +201,7 @@
 /* Theme-specific variables */
 [data-theme="light"] {
   --primary-bg: #f8f9fa;
-  --card-bg: #ffffff;
+  --card-bg: #eeeeee; /* Changed to a more noticeable light grey */
   --border-color: #e0e0e0;
   --text-primary: #333333;
   --text-secondary: #666666;
@@ -213,6 +213,31 @@
   --border-color: #404040;
   --text-primary: #ffffff;
   --text-secondary: #cccccc;
+}
+
+/* Light mode specific overrides for better contrast */
+[data-theme="light"] .page-header {
+  background: #eeeeee; /* More noticeable light grey for header box */
+  border: 1px solid #cccccc;
+}
+
+[data-theme="light"] .no-reviews-state {
+  background: #eeeeee; /* More noticeable light grey for no reviews box */
+  border: 1px solid #cccccc;
+}
+
+/* Ensure review items also get light grey background in light mode */
+[data-theme="light"] .review-item {
+  background: #eeeeee !important;
+  border: 1px solid #cccccc !important;
+}
+
+/* If there's a form background, make it light grey too */
+[data-theme="light"] .edit-form-section {
+  background: #eeeeee;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #cccccc;
 }
 
 /* Responsive design */
