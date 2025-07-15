@@ -6,12 +6,30 @@ import { useParams } from 'react-router-dom';
 import { API_KEY } from '../assets/API_KEY';
 import { Button, Skeleton } from '@mui/material';
 import FavoriteButton from '../components/FavoriteButton';
+import ReviewSection from '../components/reviews/ReviewSection';
 
 const Recipe = () => {
-
     const [details, setDetails] = useState();
-    const [active, setActive] = useState('summary')
+    const [active, setActive] = useState('summary');
+    const [user, setUser] = useState(null);
     const params = useParams();
+
+    // Get user from localStorage
+    const getLocalStorageUser = () => {
+        try {
+            const userData = localStorage.getItem('allRecipesUser');
+            if (userData) {
+                const parsedUser = JSON.parse(userData);
+                if (parsedUser.isLoggedIn) {
+                    return parsedUser;
+                }
+            }
+            return null;
+        } catch (error) {
+            console.error('Error parsing user data:', error);
+            return null;
+        }
+    };
 
     const fetchDetails = async () => {
         const data = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${API_KEY}`);
@@ -22,7 +40,28 @@ const Recipe = () => {
 
     useEffect(() => {
         fetchDetails();
-    },[params.name])
+        
+        // Get user data
+        const currentUser = getLocalStorageUser();
+        setUser(currentUser);
+
+        // Listen for user changes
+        const handleStorageChange = () => {
+            const updatedUser = getLocalStorageUser();
+            setUser(updatedUser);
+        };
+
+        // Check for updates every 500ms
+        const interval = setInterval(handleStorageChange, 500);
+        
+        // Listen for storage events
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            clearInterval(interval);
+            window.removeEventListener('storage', handleStorageChange);
+        };
+    }, [params.name]);
 
     const handleClick = (status) => {
         setActive(status)
@@ -44,19 +83,18 @@ const Recipe = () => {
                     <div className="shimmer-content-right">
                         <Skeleton variant='text' sx={{fontSize:'2.5rem'}} animation='wave' />
                         <div className="text-container-shimmer">
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
-                        <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
+                            <Skeleton variant='text' sx={{fontSize:'1.5rem'}} animation='wave' />
                         </div>
                     </div>
                 </div>
@@ -83,7 +121,7 @@ const Recipe = () => {
             </div>
             <div className="recipe-container">
                 <div className="recipe-container-left">
-                    <img src={details?.image} className='recipe-imgs' />
+                    <img src={details?.image} className='recipe-imgs' alt={details?.title} />
                 </div>
                 <div className="recipe-container-right">
                     <div className="btn-container">
@@ -119,7 +157,7 @@ const Recipe = () => {
                         </div>
                     }
                     {active === 'ingredients' && (
-                            details?.extendedIngredients.map((data) => (
+                            details?.extendedIngredients?.map((data) => (
                                 <div className="ingredient-bar" key={data?.id}>
                                     <h3 className='ingredients-h3'>
                                         <p>{data?.name}</p>
@@ -132,7 +170,7 @@ const Recipe = () => {
                         active === 'steps' && (
                             <div className="steps">
                                 <h1>Steps</h1>
-                                {details?.analyzedInstructions[0]?.steps.map((data) => (
+                                {details?.analyzedInstructions?.[0]?.steps?.map((data) => (
                                     <div className="step" key={data?.step}>
                                         <h2>Step - {data?.number}</h2>
                                         <p>{data?.step}</p>
@@ -146,6 +184,16 @@ const Recipe = () => {
                     }
                 </div>     
             </div>
+
+            {/* Review Section */}
+            <ReviewSection 
+                recipe={{
+                    id: details?.id,
+                    title: details?.title,
+                    image: details?.image
+                }}
+                user={user}
+            />
         </div>
     )
 }

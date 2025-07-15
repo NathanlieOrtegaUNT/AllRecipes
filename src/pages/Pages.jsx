@@ -8,6 +8,7 @@ import Searched from "./Searched";
 import Recipe from "./Recipe";
 import AuthPage from "./AuthPage";
 import MyFavorites from "./MyFavorites";
+import MyReviews from "./MyReviews";
 import Category from "../components/Category";
 import Search from "../components/Search";
 import Header from "../components/Header";
@@ -19,12 +20,12 @@ const Pages = () => {
             <div style={{ minHeight: '100vh' }}>
                 <Header />
                 <div className="pages-container" style={{ 
-                    paddingTop: '80px',  // Space for fixed header
-                    paddingBottom: '60px', // Space for fixed footer
-                    minHeight: 'calc(100vh - 140px)' // Ensure content area fills space
+                    paddingTop: '80px',  
+                    paddingBottom: '60px', 
+                    minHeight: 'calc(100vh - 140px)'
                 }}>
                     <Routes>
-                        {/* ORIGINAL ROUTES - Keep exactly as they were */}
+                        {/* ORIGINAL ROUTES  */}
                         <Route path="/" element={[<Search />, <Category />, <Home />]} />
                         <Route path="/cuisine/:type" element={[<Search />, <Category />, <Cuisine />]} />
                         <Route path="/searched/:search" element={[<Search />, <Category />, <Searched />]} />
@@ -32,11 +33,14 @@ const Pages = () => {
                         <Route path="/cuisine/:type/recipe/:name" element={<Recipe />} />
                         <Route path="/recipe/:name" element={<Recipe />} />
                         
-                        {/* LOGIN ROUTE - Use your existing AuthPage */}
+                        {/* LOGIN ROUTE */}
                         <Route path="/login" element={<AuthPage />} />
                         
-                        {/* NEW: MY FAVORITES ROUTE */}
+                        {/* MY FAVORITES ROUTE */}
                         <Route path="/my-favorites" element={<MyFavorites />} />
+                        
+                        {/* MY REVIEWS ROUTE */}
+                        <Route path="/my-reviews" element={<MyReviews />} />
                     </Routes>
                 </div>
                 <Footer />

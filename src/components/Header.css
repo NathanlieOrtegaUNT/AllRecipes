@@ -24,7 +24,6 @@
     align-items: center;
     gap: 5px;
     color:white;
-    /* ADDED: Smooth transition */
     transition: all 0.3s ease;
 }
 
@@ -36,7 +35,7 @@
 /* Navigation Menu */
 .header-nav {
     display: flex;
-    gap: 30px;
+    gap: 20px;
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -61,6 +60,10 @@
     background: rgba(255, 107, 53, 0.1);
 }
 
+/* SPACE  */
+.nav-spacer {
+    width: 140px;
+}
 
 /* Favorites Link Specific Styles */
 .favorites-link {
@@ -109,6 +112,33 @@
     line-height: 1;
 }
 
+/* Reviews Link Specific Styles */
+.reviews-link {
+    position: relative;
+}
+
+.reviews-text {
+    margin-right: 4px;
+}
+
+.reviews-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.review-icon {
+    width: 18px;
+    height: 18px;
+    color: #ff6b35;
+    transition: all 0.3s ease;
+}
+
+.reviews-link:hover .review-icon {
+    transform: scale(1.2);
+    color: #ff5252;
+}
+
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -121,20 +151,20 @@
     }
 }
 
-/* UPDATED: Header right section for theme toggle + user icon */
+/* Header right section for theme toggle + user icon */
 .header-right-section {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/* UPDATED: Force theme toggle text color to be white in header */
+/* Force theme toggle text color to be white in header */
 .header-right-section .toggle-label {
     color: white !important;
     font-weight: 500;
 }
 
-/* ADDED: Ensure theme toggle elements are white in header */
+
 .header-right-section .theme-toggle {
     color: white;
 }
@@ -147,23 +177,23 @@
 {
     font-size: 30px;
     cursor: pointer;
-    /* ADDED: Smooth transition */
+
     transition: all 0.3s ease;
 }
 
-/* ADDED: Theme-specific hover effects for user image */
+
 .user-img:hover {
     color: #ff6b35;
     transform: scale(1.1);
 }
 
-/* ADDED: Theme support for user avatar */
+
 .user-avatar-header:hover {
     transform: scale(1.1) !important;
     box-shadow: 0 4px 15px rgba(255, 107, 53, 0.5) !important;
 }
 
-/* ADDED: Theme-specific adjustments while keeping header consistent */
+
 [data-theme="dark"] .header-container {
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
 }
@@ -172,7 +202,7 @@
     box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.3);
 }
 
-/* ADDED: Theme toggle hover effects in header */
+
 [data-theme="dark"] .nav-link:hover {
     background: rgba(255, 107, 53, 0.15);
 }
@@ -197,11 +227,13 @@
         padding: 6px 12px;
     }
 
-    .favorites-text {
+    .favorites-text,
+    .reviews-text {
         display: none;
     }
 
-    .heart-icon {
+    .heart-icon,
+    .review-icon {
         width: 16px;
         height: 16px;
     }
@@ -213,6 +245,10 @@
         height: 14px;
         top: -6px;
         right: -6px;
+    }
+
+    .nav-spacer {
+        display: none; 
     }
 }
 
@@ -230,7 +266,8 @@
         padding: 4px 8px;
     }
 
-    .heart-icon {
+    .heart-icon,
+    .review-icon {
         width: 14px;
         height: 14px;
     }

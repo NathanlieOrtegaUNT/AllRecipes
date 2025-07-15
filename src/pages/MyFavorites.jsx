@@ -102,7 +102,7 @@ const MyFavorites = () => {
                     }}
                   />
                   <div className="recipe-overlay">
-                    <h3 className="recipe-title">{recipe.title}</h3>
+                    {/* REMOVED: Recipe title overlay on image - keeping only the title below */}
                   </div>
                 </div>
               </Link>
