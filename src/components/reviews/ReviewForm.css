@@ -22,11 +22,19 @@
 }
 
 .form-label {
-  display: block;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  font-size: 1rem;
   margin-bottom: 8px;
-  color: var(--text-primary);
-  font-weight: 500;
-  font-size: 0.95rem;
+  display: block;
+}
+
+[data-theme="light"] .form-label {
+  color: #333333 !important;
+}
+
+[data-theme="dark"] .form-label {
+  color: #ffffff !important;
 }
 
 .rating-input {
