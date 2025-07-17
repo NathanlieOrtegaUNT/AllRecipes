@@ -71,7 +71,7 @@ const ReviewForm = ({
         {/* Rating Section */}
         <div className="form-group">
           <label className="form-label">
-            Your Rating *
+            Your Rating 
           </label>
           <div className="rating-input">
             <StarRating
@@ -90,7 +90,7 @@ const ReviewForm = ({
         {/* Comment Section */}
         <div className="form-group">
           <label htmlFor="review-comment" className="form-label">
-            Your Review *
+            Your Review 
           </label>
           <textarea
             id="review-comment"
