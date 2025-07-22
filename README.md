@@ -17,9 +17,7 @@ In addition, the newly added extensions will enhance your search experience with
 
 - [Getting Started](#Getting-Started)
 
-- [Original Usage](#Original-Usage)
-
-- [New Usage with New Extensions](#New-Usage-with-New-Extensions)
+- [Usage](#Usage)
 
 - [Contributing](#Contributing)
 
@@ -43,8 +41,8 @@ In addition, the newly added extensions will enhance your search experience with
 - User Management: Secure login/registration with profile control.
 - Personalization: Theme toggle for dark/light modes. 
 - My Favorites Collection: Added a heart symbol to the website to save recipes in my favorites collection.
-- (To Be Added Sprint 2) Calendar Integration: Drag-and-drop meal planning.
-- (To Be Added Sprint 2) Improved Filtering: Search by cuisine, diet, prep time, etc.
+- Calendar Integration: Drag-and-drop meal planning.
+- (INCOMPLETE) Improved Filtering: Search by cuisine, diet, prep time, etc.
 - (To Be Added Sprint 3) Social Features: Ratings, reviews, and user feedback interaction.
 
 
@@ -90,7 +88,7 @@ To run this project locally, you'll need Node.js and npm (or yarn) installed on 
    yarn dev
 
 
-# Original Usage
+# Usage
 
 1. On the homepage, you'll find a selection of popular recipes.
 
@@ -102,10 +100,6 @@ To run this project locally, you'll need Node.js and npm (or yarn) installed on 
 
 5. Enjoy your cooking and discover new culinary delights!
 
-
-# New Usage with New Extensions
-
-(To be Added Soon...) 
 
 # Contributing
 
