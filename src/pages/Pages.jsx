@@ -1,6 +1,6 @@
 // AllRecipes/src/pages/Pages.jsx
 
-import React from 'react';
+import React from 'react'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from "./Home";
 import Cuisine from "./Cuisine";
@@ -13,6 +13,7 @@ import Category from "../components/Category";
 import Search from "../components/Search";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import MealPlannerPage from "./MealPlannerPage"; // Import your Meal Planner page
 
 const Pages = () => {
     return (
@@ -25,7 +26,7 @@ const Pages = () => {
                     minHeight: 'calc(100vh - 140px)'
                 }}>
                     <Routes>
-                        {/* ORIGINAL ROUTES  */}
+                        {/* ORIGINAL ROUTES - Keep exactly as they were */}
                         <Route path="/" element={[<Search />, <Category />, <Home />]} />
                         <Route path="/cuisine/:type" element={[<Search />, <Category />, <Cuisine />]} />
                         <Route path="/searched/:search" element={[<Search />, <Category />, <Searched />]} />
@@ -38,9 +39,10 @@ const Pages = () => {
                         
                         {/* MY FAVORITES ROUTE */}
                         <Route path="/my-favorites" element={<MyFavorites />} />
-                        
-                        {/* MY REVIEWS ROUTE */}
-                        <Route path="/my-reviews" element={<MyReviews />} />
+
+                        {/* MEAL PLANNER ROUTE */}
+                        <Route path="/meal-planner" element={<MealPlannerPage />} />
+
                     </Routes>
                 </div>
                 <Footer />
