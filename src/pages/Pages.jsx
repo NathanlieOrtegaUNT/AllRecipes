@@ -43,6 +43,9 @@ const Pages = () => {
                         {/* MEAL PLANNER ROUTE */}
                         <Route path="/meal-planner" element={<MealPlannerPage />} />
 
+                        {/* MY REVIEWS ROUTE */}
+                        <Route path="/my-reviews" element={<MyReviews />} />
+
                     </Routes>
                 </div>
                 <Footer />
