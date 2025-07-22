@@ -267,8 +267,10 @@ const getLocalStorageUser = () => {
             </div>
           </Link>
 
-          {/* Drag amd drop collection */}
-          <div className="nav-spacer"></div>
+          {/* Meal Planner - ONLY SHOW IF LOGGED IN */}
+                    <Link to="/meal-planner" className="nav-link">
+                      Meal Planner
+                    </Link>
 
           {/* My Reviews */}
           <Link 
