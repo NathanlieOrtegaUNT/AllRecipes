@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import './Recipe.css';
 import { useParams } from 'react-router-dom';
-import { API_KEY } from '../assets/API_KEY';
 import { Button, Skeleton } from '@mui/material';
 import FavoriteButton from '../components/FavoriteButton';
 import ReviewSection from '../components/reviews/ReviewSection';
@@ -14,7 +13,8 @@ const Recipe = () => {
     const [user, setUser] = useState(null);
     const params = useParams();
 
-    // Get user from localStorage
+    const API_KEY = import.meta.env.VITE_RECIPE_API_KEY;
+
     const getLocalStorageUser = () => {
         try {
             const userData = localStorage.getItem('allRecipesUser');
@@ -32,29 +32,34 @@ const Recipe = () => {
     };
 
     const fetchDetails = async () => {
-        const data = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${API_KEY}`);
-        const detailsData = await data.json();
-        console.log(detailsData);
-        setDetails(detailsData);
+        if (!API_KEY) {
+            console.error('API key not found');
+            return;
+        }
+
+        try {
+            const data = await fetch(`https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${API_KEY}`);
+            const detailsData = await data.json();
+            console.log(detailsData);
+            setDetails(detailsData);
+        } catch (error) {
+            console.error('Error fetching recipe details:', error);
+        }
     }
 
     useEffect(() => {
         fetchDetails();
         
-        // Get user data
         const currentUser = getLocalStorageUser();
         setUser(currentUser);
 
-        // Listen for user changes
         const handleStorageChange = () => {
             const updatedUser = getLocalStorageUser();
             setUser(updatedUser);
         };
 
-        // Check for updates every 500ms
         const interval = setInterval(handleStorageChange, 500);
         
-        // Listen for storage events
         window.addEventListener('storage', handleStorageChange);
 
         return () => {
