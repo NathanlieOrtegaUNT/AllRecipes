@@ -2,6 +2,7 @@
 import React, { useState, useRef } from 'react';
 import AccountSettings from './AccountSettings';
 import ImageCropperModal from './ImageCropperModal';
+import { reviewService } from '../services/reviewService';
 import './UserSidebar.css';
 
 const UserSidebar = ({ user, onClose, onLogout, onUserUpdate }) => {
@@ -63,64 +64,112 @@ const UserSidebar = ({ user, onClose, onLogout, onUserUpdate }) => {
     e.target.value = '';
   };
 
-  const handleCropComplete = (croppedImageUrl) => {
-  // Update user data with cropped profile picture
-  const updatedUser = {
-    ...currentUser,
-    profilePicture: croppedImageUrl,
-    profilePictureUpdated: new Date().toISOString(),
-    profilePictureKey: `${currentUser.email}_${Date.now()}` // Add unique key
+  const updateUserReviewsProfilePicture = async (newProfilePicture) => {
+    try {
+      const userId = currentUser.uid || currentUser.email;
+      console.log('🔄 Updating profile picture in all user reviews for userId:', userId);
+      
+      const result = await reviewService.updateUserProfilePictureInReviews(userId, newProfilePicture);
+      if (result.success) {
+        console.log('✅ Successfully updated profile picture in reviews');
+      } else {
+        console.error('❌ Failed to update profile picture in reviews:', result.error);
+      }
+      
+      // Also update replies
+      const repliesResult = await reviewService.updateUserProfilePictureInReplies(userId, newProfilePicture);
+      if (repliesResult.success) {
+        console.log('✅ Successfully updated profile picture in replies');
+      } else {
+        console.error('❌ Failed to update profile picture in replies:', repliesResult.error);
+      }
+    } catch (error) {
+      console.error('❌ Error updating profile picture in reviews/replies:', error);
+    }
   };
 
-  // Save to localStorage
-  localStorage.setItem('allRecipesUser', JSON.stringify(updatedUser));
-  
-  // Also save profile picture separately for persistence
-  localStorage.setItem(`profilePicture_${currentUser.email}`, croppedImageUrl);
+  const handleCropComplete = async (croppedImageUrl) => {
+    setImageLoading(true);
+    
+    try {
+      // Update user data with cropped profile picture
+      const updatedUser = {
+        ...currentUser,
+        profilePicture: croppedImageUrl,
+        profilePictureUpdated: new Date().toISOString(),
+        profilePictureKey: `${currentUser.email}_${Date.now()}` // Add unique key
+      };
 
-  // Update parent component
-  if (onUserUpdate) {
-    onUserUpdate(updatedUser);
-  }
+      // Save to localStorage
+      localStorage.setItem('allRecipesUser', JSON.stringify(updatedUser));
+      
+      // Also save profile picture separately for persistence
+      localStorage.setItem(`profilePicture_${currentUser.email}`, croppedImageUrl);
 
-  // Trigger storage event for cross-component updates
-  window.dispatchEvent(new Event('storage'));
+      // Update all existing reviews and replies with new profile picture
+      await updateUserReviewsProfilePicture(croppedImageUrl);
 
-  setShowImageCropper(false);
-  setSelectedImage(null);
-  console.log('✅ Profile picture updated from sidebar');
-};
+      // Update parent component
+      if (onUserUpdate) {
+        onUserUpdate(updatedUser);
+      }
+
+      // Trigger storage event for cross-component updates
+      window.dispatchEvent(new Event('storage'));
+
+      console.log('✅ Profile picture updated from sidebar');
+    } catch (error) {
+      console.error('❌ Error updating profile picture:', error);
+      alert('Error updating profile picture. Please try again.');
+    } finally {
+      setImageLoading(false);
+      setShowImageCropper(false);
+      setSelectedImage(null);
+    }
+  };
 
   const handleCropCancel = () => {
     setShowImageCropper(false);
     setSelectedImage(null);
   };
 
-const handleRemoveProfilePicture = () => {
-  if (window.confirm('Are you sure you want to remove your profile picture?')) {
-    const updatedUser = {
-      ...currentUser,
-      profilePicture: null,
-      profilePictureRemoved: new Date().toISOString()
-    };
+  const handleRemoveProfilePicture = async () => {
+    if (window.confirm('Are you sure you want to remove your profile picture?')) {
+      setImageLoading(true);
+      
+      try {
+        const updatedUser = {
+          ...currentUser,
+          profilePicture: null,
+          profilePictureRemoved: new Date().toISOString()
+        };
 
-    // Save to localStorage
-    localStorage.setItem('allRecipesUser', JSON.stringify(updatedUser));
-    
-    // Remove separate profile picture storage
-    localStorage.removeItem(`profilePicture_${currentUser.email}`);
+        // Save to localStorage
+        localStorage.setItem('allRecipesUser', JSON.stringify(updatedUser));
+        
+        // Remove separate profile picture storage
+        localStorage.removeItem(`profilePicture_${currentUser.email}`);
 
-    // Update parent component
-    if (onUserUpdate) {
-      onUserUpdate(updatedUser);
+        // Update all existing reviews and replies to remove profile picture
+        await updateUserReviewsProfilePicture(null);
+
+        // Update parent component
+        if (onUserUpdate) {
+          onUserUpdate(updatedUser);
+        }
+
+        // Trigger storage event for cross-component updates
+        window.dispatchEvent(new Event('storage'));
+
+        console.log('✅ Profile picture removed');
+      } catch (error) {
+        console.error('❌ Error removing profile picture:', error);
+        alert('Error removing profile picture. Please try again.');
+      } finally {
+        setImageLoading(false);
+      }
     }
-
-    // Trigger storage event for cross-component updates
-    window.dispatchEvent(new Event('storage'));
-
-    console.log('✅ Profile picture removed');
-  }
-};
+  };
 
   const triggerFileInput = () => {
     if (fileInputRef.current) {
@@ -140,7 +189,7 @@ const handleRemoveProfilePicture = () => {
     onLogout();
   };
 
-  // Close sidebar when clicking outside
+
   const handleOverlayClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -184,7 +233,7 @@ const handleRemoveProfilePicture = () => {
                 )}
               </div>
               
-              {/* Add/Change Picture Button - Positioned to the side */}
+              {/* Add/Change Picture Button  */}
               {showAddButton && !imageLoading && (
                 <button 
                   className="add-picture-btn"
@@ -195,7 +244,7 @@ const handleRemoveProfilePicture = () => {
                 </button>
               )}
               
-              {/* Remove Picture Button - Only show if picture exists and hovering */}
+              {/* Remove Picture Button  */}
               {currentUser.profilePicture && showAddButton && !imageLoading && (
                 <button 
                   className="remove-picture-btn"

@@ -10,11 +10,11 @@ import './MyReviews.css';
 const MyReviews = () => {
   const [user, setUser] = useState(null);
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(false); // Start with false instead of true
+  const [loading, setLoading] = useState(false); 
   const [editingReview, setEditingReview] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [reviewReplies, setReviewReplies] = useState({});
-  const [initialLoad, setInitialLoad] = useState(true); // Track if this is initial load
+  const [initialLoad, setInitialLoad] = useState(true); 
   const navigate = useNavigate();
 
   // Get user from localStorage
@@ -38,7 +38,7 @@ const MyReviews = () => {
     const currentUser = getLocalStorageUser();
     
     if (!currentUser) {
-      // Redirect to login if not authenticated
+
       navigate('/login');
       return;
     }
@@ -78,6 +78,7 @@ const MyReviews = () => {
   };
 
   const handleDeleteReview = async (reviewId) => {
+
     setLoading(true);
     
     try {
@@ -129,6 +130,7 @@ const MyReviews = () => {
   };
 
   const handleDeleteReply = async (replyId) => {
+
     try {
       const result = await reviewService.deleteReply(replyId);
       if (!result.success) {

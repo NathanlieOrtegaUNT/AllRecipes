@@ -42,11 +42,10 @@ const Reply = ({
   };
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this reply?')) {
-      setIsDeleting(true);
-      await onDelete(reply.id);
-      setIsDeleting(false);
-    }
+
+    setIsDeleting(true);
+    await onDelete(reply.id);
+    setIsDeleting(false);
   };
 
   return (

@@ -54,11 +54,10 @@ const ReviewItem = ({
   };
 
   const handleDelete = async () => {
-    if (window.confirm('Are you sure you want to delete this review?')) {
-      setIsDeleting(true);
-      await onDelete(review.id);
-      setIsDeleting(false);
-    }
+
+    setIsDeleting(true);
+    await onDelete(review.id);
+    setIsDeleting(false);
   };
 
   const handleReplySubmit = async (replyData) => {

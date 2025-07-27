@@ -8,7 +8,10 @@ import {
   doc, 
   onSnapshot, 
   serverTimestamp, 
-  getDocs 
+  getDocs,
+  query,
+  where,
+  writeBatch
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
 
@@ -81,6 +84,82 @@ export const reviewService = {
       return { success: true };
     } catch (error) {
       console.error('Error updating reply:', error);
+      return { success: false, error: error.message };
+    }
+  },
+
+  // Updates profile picture in all user's reviews
+  updateUserProfilePictureInReviews: async (userId, newProfilePicture) => {
+    try {
+      console.log('🔄 Updating profile picture in reviews for userId:', userId);
+      
+      // Get all reviews collection reference
+      const reviewsRef = collection(db, 'reviews');
+      
+      // Query for all reviews by this user
+      const q = query(reviewsRef, where('userId', '==', userId));
+      const querySnapshot = await getDocs(q);
+      
+      // Batch update all reviews
+      const batch = writeBatch(db);
+      let updateCount = 0;
+      
+      querySnapshot.forEach((docSnapshot) => {
+        batch.update(docSnapshot.ref, {
+          userProfilePicture: newProfilePicture,
+          profilePictureUpdated: serverTimestamp()
+        });
+        updateCount++;
+      });
+      
+      if (updateCount > 0) {
+        await batch.commit();
+        console.log(`✅ Updated profile picture in ${updateCount} reviews`);
+      } else {
+        console.log('ℹ️ No reviews found to update');
+      }
+      
+      return { success: true, updatedCount: updateCount };
+    } catch (error) {
+      console.error('❌ Error updating profile picture in reviews:', error);
+      return { success: false, error: error.message };
+    }
+  },
+
+  // Updates profile picture in all user's replies
+  updateUserProfilePictureInReplies: async (userId, newProfilePicture) => {
+    try {
+      console.log('🔄 Updating profile picture in replies for userId:', userId);
+      
+      // Get all replies collection reference
+      const repliesRef = collection(db, 'replies');
+      
+      // Query for all replies by this user
+      const q = query(repliesRef, where('userId', '==', userId));
+      const querySnapshot = await getDocs(q);
+      
+      // Batch update all replies
+      const batch = writeBatch(db);
+      let updateCount = 0;
+      
+      querySnapshot.forEach((docSnapshot) => {
+        batch.update(docSnapshot.ref, {
+          userProfilePicture: newProfilePicture,
+          profilePictureUpdated: serverTimestamp()
+        });
+        updateCount++;
+      });
+      
+      if (updateCount > 0) {
+        await batch.commit();
+        console.log(`✅ Updated profile picture in ${updateCount} replies`);
+      } else {
+        console.log('ℹ️ No replies found to update');
+      }
+      
+      return { success: true, updatedCount: updateCount };
+    } catch (error) {
+      console.error('❌ Error updating profile picture in replies:', error);
       return { success: false, error: error.message };
     }
   },
