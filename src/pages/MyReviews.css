@@ -3,7 +3,7 @@
 .my-reviews-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px 40px 20px 60px; /* Added more left padding */
+  padding: 20px 40px 20px 60px;
   background-color: var(--primary-bg);
   color: var(--text-primary);
   min-height: calc(100vh - 140px);
@@ -17,6 +17,16 @@
   margin-bottom: 32px;
   border: 1px solid var(--border-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Light Mode  */
+[data-theme="light"] .page-header {
+  border: 2px solid #ff6b35; 
+}
+
+/* Dark Mode  */
+[data-theme="dark"] .page-header {
+  border: 1px solid var(--border-color);
 }
 
 .header-content h1 {
@@ -105,6 +115,16 @@
   padding: 60px 20px;
   background: var(--card-bg);
   border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+/* Light Mode  */
+[data-theme="light"] .no-reviews-state {
+  border: 2px solid #ff6b35; 
+}
+
+/* Dark Mode  */
+[data-theme="dark"] .no-reviews-state {
   border: 1px solid var(--border-color);
 }
 
@@ -201,43 +221,75 @@
 /* Theme-specific variables */
 [data-theme="light"] {
   --primary-bg: #f8f9fa;
-  --card-bg: #eeeeee; /* Changed to a more noticeable light grey */
+  --card-bg: #eeeeee; 
   --border-color: #e0e0e0;
   --text-primary: #333333;
   --text-secondary: #666666;
 }
 
+/* Dark Mode Support */
+[data-theme="dark"] .meal-planner-container {
+  background-color: var(--primary-bg, #1a1a1a);
+  color: var(--text-primary, #ffffff);
+}
+
+[data-theme="dark"] .page-header {
+  border: 1px solid #666666; 
+}
+
+[data-theme="dark"] .no-reviews-state {
+  border: 1px solid #666666; 
+}
+
+[data-theme="dark"] .review-item {
+  border: 1px solid #666666 !important; 
+}
+
+[data-theme="dark"] .edit-form-section {
+  border: 1px solid #666666; 
+}
+
 [data-theme="dark"] {
   --primary-bg: #1a1a1a;
   --card-bg: #2a2a2a;
-  --border-color: #404040;
+  --border-color: #666666; 
   --text-primary: #ffffff;
   --text-secondary: #cccccc;
 }
 
 /* Light mode specific overrides for better contrast */
 [data-theme="light"] .page-header {
-  background: #eeeeee; /* More noticeable light grey for header box */
-  border: 1px solid #cccccc;
+  background: #eeeeee; 
+  border: 2px solid #ff6b35; 
 }
 
 [data-theme="light"] .no-reviews-state {
-  background: #eeeeee; /* More noticeable light grey for no reviews box */
-  border: 1px solid #cccccc;
+  background: #eeeeee; 
+  border: 2px solid #ff6b35; 
 }
 
-/* Ensure review items also get light grey background in light mode */
+
 [data-theme="light"] .review-item {
   background: #eeeeee !important;
-  border: 1px solid #cccccc !important;
+  border: 2px solid #ff6b35 !important; 
 }
 
-/* If there's a form background, make it light grey too */
+
+[data-theme="dark"] .review-item {
+  border: 1px solid var(--border-color) !important;
+}
+
+
 [data-theme="light"] .edit-form-section {
   background: #eeeeee;
   border-radius: 12px;
   padding: 20px;
-  border: 1px solid #cccccc;
+  border: 2px solid #ff6b35;
+}
+
+/* Dark mode form section keeps original border */
+[data-theme="dark"] .edit-form-section {
+  border: 1px solid var(--border-color);
 }
 
 /* Responsive design */

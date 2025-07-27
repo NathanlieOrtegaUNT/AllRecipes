@@ -4,6 +4,7 @@
     gap: 50px;
     justify-content: center;
 }
+
 .category-container a 
 {
     display: flex;
@@ -11,20 +12,40 @@
     justify-content: center;
     align-items: center;
     background-color: #202020;
-    color:white;
+    color: white;
     border-radius: 50%;
-    padding:10px;
+    padding: 10px;
     height: 80px;
     width: 80px;
     cursor: pointer;
     transition: all 100ms ease-in-out;
     text-decoration: none;
 }
+
 .category-container a:hover 
 {
     transform: scale(0.95);
 }
+
 .active 
 {
-    background-color:#F77121 !important;
-} 
+    background-color: #F77121 !important;
+    color: white !important;
+}
+
+/* Light Mode Support */
+[data-theme="light"] .category-container a {
+    background-color: #202020;
+    color: white;
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .category-container a {
+    background-color: rgb(199, 198, 195);
+    color: black;
+}
+
+
+.category-container a[href="/cuisine/American"] p {
+    font-size: 0.90em;
+}
