@@ -2,7 +2,7 @@
 
 .reply-form-container {
   background: var(--reply-form-bg);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--reply-form-border-color);
   border-radius: 8px;
   padding: 16px;
   margin: 12px 0 12px 40px;
@@ -33,7 +33,7 @@
   width: 100%;
   min-height: 80px;
   padding: 10px;
-  border: 2px solid var(--border-color);
+  border: 2px solid var(--reply-textarea-border-color);
   border-radius: 6px;
   font-family: inherit;
   font-size: 0.9rem;
@@ -81,7 +81,7 @@
   gap: 8px;
   justify-content: flex-end;
   padding-top: 8px;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--reply-form-border-color);
 }
 
 .reply-btn-cancel,
@@ -99,7 +99,7 @@
 .reply-btn-cancel {
   background: var(--secondary-bg);
   color: var(--text-primary);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--reply-form-border-color);
 }
 
 .reply-btn-cancel:hover:not(:disabled) {
@@ -150,7 +150,9 @@
 /* Theme-specific variables */
 [data-theme="light"] {
   --reply-form-bg: #f9f9f9;
-  --border-color: #e0e0e0;
+  --border-color: #ff6b35;
+  --reply-form-border-color: #ff6b35;
+  --reply-textarea-border-color: #ff6b35;
   --input-bg: #ffffff;
   --secondary-bg: #f5f5f5;
   --hover-bg: #eeeeee;
@@ -159,6 +161,8 @@
 [data-theme="dark"] {
   --reply-form-bg: #1f1f1f;
   --border-color: #404040;
+  --reply-form-border-color: #404040;
+  --reply-textarea-border-color: #404040;
   --input-bg: #333333;
   --secondary-bg: #333333;
   --hover-bg: #404040;

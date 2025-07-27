@@ -82,27 +82,39 @@
   margin-left: 4px;
 }
 
-/* Focus states for accessibility */
+
 .star.interactive:focus {
   outline: 2px solid #ff6b35;
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-/* Theme support - Light Mode */
+/* Light Mode */
 [data-theme="light"] .star.empty {
   color: #ddd;
+  -webkit-text-stroke: 1px #000000;
+  text-stroke: 1px #000000;
 }
 
 [data-theme="light"] .star.filled {
   color: #ff6b35;
+  -webkit-text-stroke: 1px #000000;
+  text-stroke: 1px #000000;
 }
 
 [data-theme="light"] .star.interactive:hover {
   color: #ff6b35 !important;
+  -webkit-text-stroke: 1px #000000;
+  text-stroke: 1px #000000;
 }
 
-/* Theme support - Dark Mode */
+[data-theme="light"] .star.interactive.empty {
+  color: #ddd;
+  -webkit-text-stroke: 1px #000000;
+  text-stroke: 1px #000000;
+}
+
+/* Dark Mode */
 [data-theme="dark"] .star.empty {
   color: #555;
 }

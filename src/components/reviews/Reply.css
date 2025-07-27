@@ -2,7 +2,7 @@
 
 .reply-item {
   background: var(--reply-bg);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--reply-border-color);
   border-radius: 8px;
   padding: 12px;
   margin: 8px 0 8px 40px; 
@@ -101,7 +101,7 @@
   top: 100%;
   right: 0;
   background: var(--card-bg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--reply-border-color);
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 10;
@@ -163,14 +163,16 @@
 [data-theme="light"] {
   --reply-bg: #f9f9f9;
   --card-bg: #ffffff;
-  --border-color: #e0e0e0;
+  --border-color: #ff6b35;
+  --reply-border-color: #ff6b35;
   --hover-bg: #f5f5f5;
 }
 
 [data-theme="dark"] {
-  --reply-bg: #1f1f1f;
+  --reply-bg: #2a2a2a;
   --card-bg: #2a2a2a;
   --border-color: #404040;
+  --reply-border-color: #404040;
   --hover-bg: #333333;
 }
 
