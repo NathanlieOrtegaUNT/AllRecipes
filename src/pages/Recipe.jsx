@@ -204,3 +204,27 @@ const Recipe = () => {
 }
 
 export default Recipe;
+
+///Kobra's code 
+
+
+const saveRecentlyViewed = (recipe) => {
+    try {
+        const existing = JSON.parse(localStorage.getItem('recentRecipes')) || [];
+
+        const newRecipe = {
+            id: recipe.id,
+            title: recipe.title,
+            image: recipe.image
+        };
+
+        const filtered = existing.filter((item) => item.id !== recipe.id);
+        const updated = [newRecipe, ...filtered].slice(0, 10);
+
+        localStorage.setItem('recentRecipes', JSON.stringify(updated));
+    } catch (error) {
+        console.error('Error saving recently viewed recipes:', error);
+    }
+};
+
+
